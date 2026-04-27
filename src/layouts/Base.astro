@@ -1,0 +1,92 @@
+---
+const { title = 'Keratoconus — See What We See' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #f5f5f0;
+      --black: #0a0a0a;
+      --accent: #00b4d8;
+      --nav-h: 3.25rem;
+    }
+
+    html { scroll-behavior: auto; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    #site-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+    }
+
+    #site-nav a {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+    #site-nav a:hover { opacity: 1; }
+    #site-nav .nav-links { display: flex; gap: 1.5rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(245,245,240,0.55);
+      border-top: 1px solid rgba(245,245,240,0.12);
+    }
+    footer a { color: rgba(245,245,240,0.55); }
+    footer p + p { margin-top: 0.5rem; }
+
+    /* ── CITE links — shared across all pages ── */
+    a.cite {
+      font-size: 0.68rem;
+      color: var(--accent);
+      opacity: 0.45;
+      margin-left: 0.35em;
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+      white-space: nowrap;
+      transition: opacity 0.15s;
+    }
+    a.cite:hover { opacity: 1; }
+  </style>
+  <slot name="head" />
+</head>
+<body>
+  <nav id="site-nav">
+    <a href="/">KC Awareness</a>
+    <div class="nav-links">
+      <a href="/about">About</a>
+    </div>
+  </nav>
+  <slot />
+  <footer>
+    <slot name="footer-extra" />
+    <p>&copy; 2026 &mdash; Keratoconus awareness. Not medical advice.</p>
+  </footer>
+</body>
+</html>

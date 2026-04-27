@@ -1,0 +1,93 @@
+---
+import Base from '../layouts/Base.astro';
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  CONTENT — edit text freely here
+//  Don't touch anything below the closing ━━━ line.
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+const page = {
+  title: 'About — Keratoconus Awareness',
+  heading: 'About',
+  intro: 'A few sentences here about who you are — patient, advocate, both.',
+};
+
+// Add or remove sections by copying/deleting a { heading, paragraphs } block.
+// Each entry in paragraphs becomes its own paragraph on the page.
+const sections = [
+  {
+    heading: 'My experience with KC',
+    paragraphs: [
+      'Your story here. What was your diagnosis like? How long did it take? What changed?',
+      'A second paragraph if you want more space to say something.',
+    ],
+  },
+  {
+    heading: 'Why I built this',
+    paragraphs: [
+      'What you want people to take away from this site.',
+    ],
+  },
+];
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---
+
+<Base title={page.title}>
+
+  <style>
+    #about {
+      padding: calc(var(--nav-h) + 6rem) 2rem 10rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    #about h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-intro {
+      font-size: clamp(1rem, 1.6vw, 1.2rem);
+      color: rgba(245,245,240,0.6);
+      line-height: 1.75;
+      margin-bottom: 4.5rem;
+      max-width: 52ch;
+    }
+
+    .about-section {
+      margin-bottom: 3rem;
+    }
+
+    .about-section h2 {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.85rem;
+    }
+
+    .about-section p {
+      font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+      line-height: 1.85;
+      color: rgba(245,245,240,0.7);
+      margin-bottom: 0.85rem;
+    }
+    .about-section p:last-child { margin-bottom: 0; }
+  </style>
+
+  <main id="about">
+    <h1>{page.heading}</h1>
+    <p class="about-intro">{page.intro}</p>
+    {sections.map(section => (
+      <section class="about-section">
+        <h2>{section.heading}</h2>
+        {section.paragraphs.map(p => <p>{p}</p>)}
+      </section>
+    ))}
+  </main>
+
+</Base>

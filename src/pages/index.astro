@@ -1,29 +1,62 @@
 ---
+import Base from '../layouts/Base.astro';
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  CONTENT — edit text freely here
+//  Don't touch anything below the closing ━━━ line.
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+const hero = {
+  eyebrow: 'Keratoconus Awareness',
+  sub: '1 in 2,000 people live with a progressive eye disease that quietly steals their vision. Scroll to experience it.',
+};
+
+const vision = {
+  captionNormal: 'This is how most people see the world — sharp, clear, defined.',
+  captionKC: "For someone with keratoconus, light scatters, halos form, and even the best glasses can't fully correct it.",
+};
+
+const what = {
+  heading: 'When the cornea stops holding its shape',
+  para1: 'Keratoconus (KC) is a progressive disorder where the cornea — normally a dome — gradually thins and bulges outward into a cone shape. As it distorts, it bends light incorrectly, causing blurred and distorted vision that worsens over years.',
+  para2: 'It typically begins in the late teens or early twenties and can progress through the thirties. In severe cases, a corneal transplant becomes the only option. Caught early, specialty contact lenses and corneal cross-linking can slow or halt progression.',
+};
+
+// Add or remove cards by copying/deleting a { heading, body } object.
+const symptoms = [
+  { heading: 'Ghosting & doubling',          body: 'Multiple ghost images overlay a single object, especially under bright light.' },
+  { heading: 'Halos & streaks',               body: 'Light sources bloom into starbursts and smeared streaks at night.' },
+  { heading: "Blur that glasses can't fix",   body: 'Standard prescriptions stop correcting vision as the cone shape progresses.' },
+  { heading: 'Light sensitivity',             body: 'Oncoming headlights, screens, and sunlight become overwhelming and painful.' },
+  { heading: 'Frequent prescription changes', body: 'Rapid shifts in astigmatism that no single pair of glasses keeps up with.' },
+  { heading: 'Eye rubbing',                   body: 'Chronic itching leads to rubbing — associated with accelerated corneal thinning.' },
+];
+
+const cta = {
+  heading: 'Early diagnosis changes everything',
+  body: "KC is often misdiagnosed as astigmatism for years. If any of this looked familiar, ask your eye doctor about corneal topography.",
+};
+
+// Add sections here to insert prose between Symptoms and the CTA.
+// Each section gets a small label, a heading, and as many paragraphs as you want.
+// Leave this empty ([]) and nothing renders.
+const extraSections: { label?: string; heading: string; paragraphs: string[] }[] = [
+  // {
+  //   label: 'My experience',
+  //   heading: 'Living with KC',
+  //   paragraphs: [
+  //     'First paragraph...',
+  //     'Second paragraph...',
+  //   ],
+  // },
+];
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Keratoconus — See What We See</title>
+
+<Base title="Keratoconus — See What We See">
+
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --white: #f5f5f0;
-      --black: #0a0a0a;
-      --accent: #00b4d8;
-    }
-
-    html { scroll-behavior: auto; }
-
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      overflow-x: hidden;
-    }
-
     /* ── HERO ── */
     #hero {
       height: 100vh;
@@ -114,7 +147,7 @@
     /* ── VISION SECTION ── */
     #vision {
       position: relative;
-      height: 300vh; /* scroll distance for the pin */
+      height: 300vh;
     }
 
     #vision-sticky {
@@ -135,15 +168,6 @@
       object-fit: cover;
     }
 
-    #img-normal {
-      z-index: 1;
-    }
-
-    #img-kc {
-      z-index: 2;
-      clip-path: circle(0% at 50% 50%);
-    }
-
     .vision-label {
       position: absolute;
       z-index: 10;
@@ -158,8 +182,17 @@
       pointer-events: none;
     }
 
-    #label-normal { color: var(--white); }
-    #label-kc { color: var(--accent); }
+    #label-normal {
+      color: var(--white);
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(4px);
+    }
+    #label-kc {
+      color: var(--accent);
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(4px);
+      border-color: var(--accent);
+    }
 
     .vision-caption {
       position: absolute;
@@ -254,6 +287,29 @@
       color: rgba(245,245,240,0.6);
     }
 
+    /* ── EXTRA SECTIONS ── */
+    .extra-section {
+      padding: 10rem 2rem;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .extra-section h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 2rem;
+    }
+
+    .extra-section p {
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      line-height: 1.8;
+      color: rgba(245,245,240,0.7);
+      margin-bottom: 1.25rem;
+    }
+    .extra-section p:last-child { margin-bottom: 0; }
+
     /* ── CTA ── */
     #cta {
       padding: 10rem 2rem;
@@ -286,30 +342,16 @@
       border-radius: 2px;
       transition: opacity 0.2s;
     }
-
     .btn:hover { opacity: 0.85; }
-
-    footer {
-      padding: 2rem;
-      text-align: center;
-      font-size: 0.75rem;
-      color: rgba(245,245,240,0.25);
-      border-top: 1px solid rgba(245,245,240,0.06);
-    }
   </style>
-</head>
-<body>
 
   <!-- HERO -->
   <section id="hero">
     <div class="hero-bg"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow">Keratoconus Awareness</p>
-      <h1 class="hero-headline">See What<br><em>We See</em></h1>
-      <p class="hero-sub">
-        1 in 2,000 people live with a progressive eye disease that quietly steals their vision.
-        Scroll to experience it.
-      </p>
+      <p class="hero-eyebrow">{hero.eyebrow}</p>
+      <h1 class="hero-headline">See What<br /><em>We See</em></h1>
+      <p class="hero-sub">{hero.sub}</p>
     </div>
     <div class="scroll-hint">
       Scroll
@@ -317,11 +359,10 @@
     </div>
   </section>
 
-  <!-- VISION TRANSITION -->
+  <!-- VISION TRANSITION — animation controlled by GSAP below -->
   <section id="vision">
     <div id="vision-sticky">
 
-      <!-- SVG filter: corneal distortion + blur, animated by GSAP -->
       <svg width="0" height="0" aria-hidden="true" style="position:absolute;overflow:hidden">
         <defs>
           <filter id="kc" x="-20%" y="-20%" width="140%" height="140%">
@@ -332,21 +373,18 @@
         </defs>
       </svg>
 
-      <!-- Sharp base image, always full opacity -->
       <img id="img-clean"  class="vision-img" src="/images/normal_hires.jpg" alt="Normal vision" />
-      <!-- Distorted+blurred copy via SVG filter, fades in -->
       <img id="img-warped" class="vision-img" src="/images/normal_hires.jpg" style="filter:url(#kc);opacity:0" alt="" aria-hidden="true" />
-      <!-- Ghost layer for monocular diplopia, screen blend isolates brights naturally -->
       <img id="img-ghost"  class="vision-img" src="/images/normal_hires.jpg" style="opacity:0;mix-blend-mode:screen" alt="" aria-hidden="true" />
 
       <span class="vision-label" id="label-normal">Normal</span>
       <span class="vision-label" id="label-kc">Keratoconus</span>
 
       <div class="vision-caption" id="caption-normal">
-        <p>This is how most people see the world — sharp, clear, defined.</p>
+        <p>{vision.captionNormal}</p>
       </div>
       <div class="vision-caption" id="caption-kc">
-        <p>For someone with keratoconus, light scatters, halos form, and even the best glasses can't fully correct it.</p>
+        <p>{vision.captionKC}</p>
       </div>
     </div>
   </section>
@@ -354,16 +392,16 @@
   <!-- WHAT IS KC -->
   <section id="what">
     <p class="section-label">The condition</p>
-    <h2>When the cornea stops holding its shape</h2>
+    <h2>{what.heading}</h2>
     <p>
-      Keratoconus (KC) is a progressive disorder where the cornea — normally a dome — gradually thins
-      and bulges outward into a cone shape. As it distorts, it bends light incorrectly, causing blurred
-      and distorted vision that worsens over years.
+      {what.para1}
+      <a href="https://nkcf.org/about-keratoconus/" class="cite" target="_blank" rel="noopener noreferrer">NKCF</a>
+      <a href="https://www.mayoclinic.org/diseases-conditions/keratoconus/symptoms-causes/syc-20351352" class="cite" target="_blank" rel="noopener noreferrer">Mayo Clinic</a>
     </p>
     <p>
-      It typically begins in the late teens or early twenties and can progress through the thirties.
-      In severe cases, a corneal transplant becomes the only option. Caught early, specialty contact
-      lenses and corneal cross-linking can slow or halt progression.
+      {what.para2}
+      <a href="https://www.mayoclinic.org/diseases-conditions/keratoconus/diagnosis-treatment/drc-20351357" class="cite" target="_blank" rel="noopener noreferrer">Mayo Clinic</a>
+      <a href="https://nkcf.org/about-keratoconus/" class="cite" target="_blank" rel="noopener noreferrer">NKCF</a>
     </p>
   </section>
 
@@ -373,129 +411,109 @@
       <p class="section-label">What it feels like</p>
       <h2>Symptoms of keratoconus</h2>
       <div class="symptom-grid">
-        <div class="symptom-card">
-          <h3>Ghosting &amp; doubling</h3>
-          <p>Multiple ghost images overlay a single object, especially under bright light.</p>
-        </div>
-        <div class="symptom-card">
-          <h3>Halos &amp; streaks</h3>
-          <p>Light sources bloom into starbursts and smeared streaks at night.</p>
-        </div>
-        <div class="symptom-card">
-          <h3>Blur that glasses can't fix</h3>
-          <p>Standard prescriptions stop correcting vision as the cone shape progresses.</p>
-        </div>
-        <div class="symptom-card">
-          <h3>Light sensitivity</h3>
-          <p>Oncoming headlights, screens, and sunlight become overwhelming and painful.</p>
-        </div>
-        <div class="symptom-card">
-          <h3>Frequent prescription changes</h3>
-          <p>Rapid shifts in astigmatism that no single pair of glasses keeps up with.</p>
-        </div>
-        <div class="symptom-card">
-          <h3>Eye rubbing</h3>
-          <p>Chronic itching and rubbing — a known trigger that accelerates thinning.</p>
-        </div>
+        {symptoms.map(s => (
+          <div class="symptom-card">
+            <h3>{s.heading}</h3>
+            <p>{s.body} <a href="https://nkcf.org/about-keratoconus/keratoconus-symptoms/" class="cite" target="_blank" rel="noopener noreferrer">NKCF</a></p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
+  <!-- EXTRA SECTIONS -->
+  {extraSections.map(s => (
+    <section class="extra-section">
+      {s.label && <p class="section-label">{s.label}</p>}
+      <h2>{s.heading}</h2>
+      {s.paragraphs.map(p => <p>{p}</p>)}
+    </section>
+  ))}
+
   <!-- CTA -->
   <section id="cta">
     <p class="section-label">Take action</p>
-    <h2>Early diagnosis changes everything</h2>
-    <p>
-      KC is often misdiagnosed as astigmatism for years.<br />
-      If any of this looked familiar, ask your eye doctor about corneal topography.
-    </p>
+    <h2>{cta.heading}</h2>
+    <p>{cta.body}</p>
     <a class="btn" href="https://www.nkcf.org" target="_blank" rel="noopener">
       National Keratoconus Foundation
     </a>
   </section>
 
-  <footer>
-    <p>&copy; 2026 &mdash; Keratoconus awareness. Not medical advice.</p>
-    <p style="margin-top:0.5rem;font-size:0.7rem;opacity:0.5">
+  <Fragment slot="footer-extra">
+    <p style="font-size:0.7rem;opacity:0.5">
       Vision simulation based on
-      <a href="https://www.flickr.com/photos/sprengben/5126320106/" target="_blank" rel="noopener" style="color:inherit">&ldquo;Times Square Rain Dance&rdquo; by Spreng Ben</a>,
-      used under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" rel="noopener" style="color:inherit">CC BY-NC-SA 3.0</a>.
-      KC simulation adapted from <a href="https://www.livingwithkeratoconus.com" target="_blank" rel="noopener" style="color:inherit">livingwithkeratoconus.com</a>.
+      <a href="https://www.flickr.com/photos/sprengben/5126320106/" target="_blank" rel="noopener">&ldquo;Times Square Rain Dance&rdquo; by Spreng Ben</a>,
+      used under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" rel="noopener">CC BY-NC-SA 3.0</a>.
+      KC simulation adapted from <a href="https://www.livingwithkeratoconus.com" target="_blank" rel="noopener">livingwithkeratoconus.com</a>.
     </p>
-  </footer>
+  </Fragment>
 
-  <script>
-    import { gsap } from 'gsap';
-    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+</Base>
 
-    gsap.registerPlugin(ScrollTrigger);
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-    // ── Hero entrance ──────────────────────────────────────────────
-    const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-    heroTl
-      .to('.hero-eyebrow',   { opacity: 1, y: 0, duration: 0.9, delay: 0.3 }, 0)
-      .from('.hero-headline', { y: 40, duration: 1 }, 0.2)
-      .to('.hero-headline',  { opacity: 1, duration: 1 }, 0.2)
-      .to('.hero-sub',       { opacity: 1, y: 0, duration: 0.8 }, 0.6)
-      .to('.scroll-hint',    { opacity: 1, duration: 0.6 }, 1.1);
+  gsap.registerPlugin(ScrollTrigger);
 
-    // keep scroll-hint bobbing
-    gsap.to('.scroll-hint .arrow', {
-      scaleY: 0.5,
-      transformOrigin: 'top center',
-      duration: 0.8,
-      repeat: -1,
-      yoyo: true,
-      ease: 'power1.inOut',
-    });
+  // ── Hero entrance ──────────────────────────────────────────────
+  const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  heroTl
+    .to('.hero-eyebrow',    { opacity: 1, y: 0, duration: 0.9, delay: 0.3 }, 0)
+    .from('.hero-headline', { y: 40, duration: 1 }, 0.2)
+    .to('.hero-headline',   { opacity: 1, duration: 1 }, 0.2)
+    .to('.hero-sub',        { opacity: 1, y: 0, duration: 0.8 }, 0.6)
+    .to('.scroll-hint',     { opacity: 1, duration: 0.6 }, 1.1);
 
-    // ── Vision transition ──────────────────────────────────────────
-    // Targets for SVG filter attribute animation
-    const kcDisp  = document.getElementById('kc-d');
-    const kcBlur  = document.getElementById('kc-b');
+  gsap.to('.scroll-hint .arrow', {
+    scaleY: 0.5,
+    transformOrigin: 'top center',
+    duration: 0.8,
+    repeat: -1,
+    yoyo: true,
+    ease: 'power1.inOut',
+  });
 
-    const visionTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '#vision',
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 1.5,
-      },
-    });
+  // ── Vision transition ──────────────────────────────────────────
+  const kcDisp = document.getElementById('kc-d');
+  const kcBlur = document.getElementById('kc-b');
 
-    visionTl
-      // Phase 1 (0–0.15): reveal the crisp normal image label
-      .to('#label-normal',   { opacity: 1, duration: 0.15 }, 0)
-      .to('#caption-normal', { opacity: 1, duration: 0.15 }, 0)
+  const visionTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#vision',
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 1.5,
+    },
+  });
 
-      // Phase 2 (0.2–0.75): degrade — subtle distortion, mild blur, ghost, and headlight bloom
-      .to('#label-normal',   { opacity: 0, duration: 0.08 }, 0.22)
-      .to('#caption-normal', { opacity: 0, duration: 0.08 }, 0.22)
-      // Less swirl, more ghosting
-      .to(kcDisp, { attr: { scale: 8 },          duration: 0.55, ease: 'power1.in' }, 0.2)
-      .to(kcBlur, { attr: { stdDeviation: 0.6 }, duration: 0.55, ease: 'power1.in' }, 0.2)
-      .to('#img-warped', { opacity: 0.35, duration: 0.55 }, 0.2)
-      .to('#img-ghost',  { opacity: 0.6, x: 20, y: 11, duration: 0.45 }, 0.25)
+  visionTl
+    // Phase 1: reveal the crisp label
+    .to('#label-normal',   { opacity: 1, duration: 0.15 }, 0)
+    .to('#caption-normal', { opacity: 1, duration: 0.15 }, 0)
+    // Phase 2: degrade — subtle distortion, mild blur, ghost
+    .to('#label-normal',   { opacity: 0, duration: 0.08 }, 0.22)
+    .to('#caption-normal', { opacity: 0, duration: 0.08 }, 0.22)
+    .to(kcDisp, { attr: { scale: 8 },          duration: 0.55, ease: 'power1.in' }, 0.2)
+    .to(kcBlur, { attr: { stdDeviation: 0.6 }, duration: 0.55, ease: 'power1.in' }, 0.2)
+    .to('#img-warped', { opacity: 0.35, duration: 0.55 }, 0.2)
+    .to('#img-ghost',  { opacity: 0.6, x: 20, y: 11, duration: 0.45 }, 0.25)
+    // Phase 3: surface KC label
+    .to('#label-kc',   { opacity: 1, duration: 0.12 }, 0.75)
+    .to('#caption-kc', { opacity: 1, duration: 0.12 }, 0.78)
+    .to({}, { duration: 0.1 });
 
-      // Phase 3 (0.75–0.9): surface the KC label
-      .to('#label-kc',   { opacity: 1, duration: 0.12 }, 0.75)
-      .to('#caption-kc', { opacity: 1, duration: 0.12 }, 0.78)
-
-      // hold at end
-      .to({}, { duration: 0.1 });
-
-    // ── Symptom cards stagger ──────────────────────────────────────
-    gsap.to('.symptom-card', {
-      opacity: 1,
-      y: 0,
-      duration: 0.6,
-      stagger: 0.1,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.symptom-grid',
-        start: 'top 80%',
-      },
-    });
-  </script>
-</body>
-</html>
+  // ── Symptom cards stagger ──────────────────────────────────────
+  gsap.to('.symptom-card', {
+    opacity: 1,
+    y: 0,
+    duration: 0.6,
+    stagger: 0.1,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '.symptom-grid',
+      start: 'top 80%',
+    },
+  });
+</script>
