@@ -1,5 +1,7 @@
 ---
 const { title = 'Keratoconus — See What We See' } = Astro.props;
+const path = Astro.url.pathname;
+const isHome = path === '/';
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +9,7 @@ const { title = 'Keratoconus — See What We See' } = Astro.props;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
-  <style>
+  <style is:global>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -26,29 +28,102 @@ const { title = 'Keratoconus — See What We See' } = Astro.props;
       overflow-x: hidden;
     }
 
+    /* ── SKIP NAV ── */
+    .skip-nav {
+      position: fixed;
+      top: 0.75rem;
+      left: 0.75rem;
+      z-index: 9999;
+      padding: 0.5em 1em;
+      background: var(--accent);
+      color: var(--black);
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-decoration: none;
+      border-radius: 2px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s;
+    }
+    .skip-nav:focus-visible {
+      opacity: 1;
+      pointer-events: auto;
+      outline: 2px solid var(--white);
+      outline-offset: 3px;
+    }
+
+    /* ── SCREEN READER ONLY ── */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ── FOCUS ── */
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
     /* ── NAV ── */
     #site-nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       height: var(--nav-h);
-      z-index: 100;
+      z-index: 200;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 2rem;
+      padding: 0 2.25rem;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(8px);
+      transition: opacity 0.4s ease;
+    }
+
+    /* Home page: starts hidden, JS adds .nav-visible after vision section */
+    #site-nav.nav-reveal {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #site-nav.nav-reveal.nav-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #site-nav.nav-reveal {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transition: none;
+      }
     }
 
     #site-nav a {
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--white);
       text-decoration: none;
-      opacity: 0.5;
+      opacity: 0.7;
       transition: opacity 0.2s;
     }
     #site-nav a:hover { opacity: 1; }
-    #site-nav .nav-links { display: flex; gap: 1.5rem; }
+
+    #site-nav a.active {
+      color: var(--accent);
+      opacity: 0.9;
+    }
+
+    #nav-links {
+      display: flex;
+      gap: 2rem;
+    }
 
     /* ── FOOTER ── */
     footer {
@@ -77,16 +152,24 @@ const { title = 'Keratoconus — See What We See' } = Astro.props;
   <slot name="head" />
 </head>
 <body>
-  <nav id="site-nav">
+
+  <a href="#main-content" class="skip-nav">Skip to content</a>
+
+  <nav id="site-nav" class={isHome ? 'nav-reveal' : ''} aria-label="Site navigation">
     <a href="/">KC Awareness</a>
-    <div class="nav-links">
-      <a href="/about">About</a>
+    <div id="nav-links">
+      <a href="/about" class={path.startsWith('/about') ? 'active' : ''}>About</a>
+      <a href="/advocacy" class={path.startsWith('/advocacy') ? 'active' : ''}>Advocacy</a>
     </div>
   </nav>
+
   <slot />
+
   <footer>
     <slot name="footer-extra" />
-    <p>&copy; 2026 &mdash; Keratoconus awareness. Not medical advice.</p>
+    <p>&copy; 2026 · Keratoconus awareness. Not medical advice.</p>
   </footer>
+
+
 </body>
 </html>

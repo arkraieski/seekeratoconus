@@ -7,25 +7,30 @@ import Base from '../layouts/Base.astro';
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 const page = {
-  title: 'About — Keratoconus Awareness',
-  heading: 'About',
-  intro: 'A few sentences here about who you are — patient, advocate, both.',
+  title: 'Advocacy — Keratoconus Awareness',
+  heading: 'My Approach to Advocacy',
+  intro: 'A sentence or two on what drives you — what advocacy means to you personally.',
 };
 
 // Add or remove sections by copying/deleting a { heading, paragraphs } block.
-// Each entry in paragraphs becomes its own paragraph on the page.
 const sections = [
   {
-    heading: 'My experience with KC',
+    heading: 'Why awareness matters',
     paragraphs: [
-      'Your story here. What was your diagnosis like? How long did it take? What changed?',
-      'A second paragraph if you want more space to say something.',
+      'Your thoughts on the gap between how common KC is and how little most people know about it.',
+      'What you wish someone had told you — or told your doctors — earlier.',
     ],
   },
   {
-    heading: 'Why I built this',
+    heading: 'What I try to do',
     paragraphs: [
-      'What you want people to take away from this site.',
+      'How you approach conversations about KC — with friends, family, doctors, or online.',
+    ],
+  },
+  {
+    heading: 'What you can do',
+    paragraphs: [
+      'Concrete things a reader can do: share this site, mention KC to their eye doctor, donate to NKCF, etc.',
     ],
   },
 ];
@@ -36,13 +41,13 @@ const sections = [
 <Base title={page.title}>
 
   <style>
-    #about {
+    #advocacy {
       padding: calc(var(--nav-h) + 6rem) 2rem 10rem;
       max-width: 680px;
       margin: 0 auto;
     }
 
-    #about h1 {
+    #advocacy h1 {
       font-size: clamp(2.2rem, 5vw, 3.5rem);
       font-weight: 700;
       letter-spacing: -0.02em;
@@ -50,7 +55,7 @@ const sections = [
       margin-bottom: 1.5rem;
     }
 
-    .about-intro {
+    .page-intro {
       font-size: clamp(1rem, 1.6vw, 1.2rem);
       color: rgba(245,245,240,0.6);
       line-height: 1.75;
@@ -58,11 +63,11 @@ const sections = [
       max-width: 52ch;
     }
 
-    .about-section {
+    .content-section {
       margin-bottom: 3rem;
     }
 
-    .about-section h2 {
+    .content-section h2 {
       font-size: 0.7rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
@@ -70,21 +75,21 @@ const sections = [
       margin-bottom: 0.85rem;
     }
 
-    .about-section p {
+    .content-section p {
       font-size: clamp(0.95rem, 1.4vw, 1.05rem);
       line-height: 1.85;
       color: rgba(245,245,240,0.7);
       margin-bottom: 0.85rem;
     }
-    .about-section p:last-child { margin-bottom: 0; }
+    .content-section p:last-child { margin-bottom: 0; }
   </style>
 
-  <main id="about" aria-labelledby="about-heading">
+  <main id="advocacy" aria-labelledby="advocacy-heading">
     <span id="main-content" tabindex="-1" class="sr-only"></span>
-    <h1 id="about-heading">{page.heading}</h1>
-    <p class="about-intro">{page.intro}</p>
+    <h1 id="advocacy-heading">{page.heading}</h1>
+    <p class="page-intro">{page.intro}</p>
     {sections.map(section => (
-      <section class="about-section">
+      <section class="content-section">
         <h2>{section.heading}</h2>
         {section.paragraphs.map(p => <p>{p}</p>)}
       </section>

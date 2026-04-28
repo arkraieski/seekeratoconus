@@ -7,12 +7,12 @@ import Base from '../layouts/Base.astro';
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 const hero = {
-  eyebrow: 'Keratoconus Awareness',
-  sub: '1 in 2,000 people live with a progressive eye disease that quietly steals their vision. Scroll to experience it.',
+  heading: 'See What We See',
+  body: 'Keratoconus affects roughly 1 in 2,000 people — most misdiagnosed for years. Scroll to experience what they see.',
 };
 
 const vision = {
-  captionNormal: 'This is how most people see the world — sharp, clear, defined.',
+  labelKC:   'Keratoconus',
   captionKC: "For someone with keratoconus, light scatters, halos form, and even the best glasses can't fully correct it.",
 };
 
@@ -57,97 +57,10 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
 <Base title="Keratoconus — See What We See">
 
   <style>
-    /* ── HERO ── */
-    #hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    #hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.85) 100%);
-      z-index: 1;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: #0a0a0a url('/images/normal_hires.jpg') center/cover no-repeat;
-      z-index: 0;
-      opacity: 0.25;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-eyebrow {
-      font-size: clamp(0.65rem, 1.2vw, 0.85rem);
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.25rem;
-      opacity: 0;
-    }
-
-    .hero-headline {
-      font-size: clamp(2.8rem, 7vw, 6rem);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      opacity: 0;
-    }
-
-    .hero-headline em {
-      font-style: normal;
-      color: var(--accent);
-    }
-
-    .hero-sub {
-      margin-top: 1.5rem;
-      font-size: clamp(1rem, 1.8vw, 1.25rem);
-      color: rgba(245,245,240,0.6);
-      max-width: 44ch;
-      line-height: 1.6;
-      opacity: 0;
-    }
-
-    .scroll-hint {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      translate: -50% 0;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      color: rgba(245,245,240,0.35);
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      opacity: 0;
-    }
-
-    .scroll-hint .arrow {
-      width: 1px;
-      height: 48px;
-      background: linear-gradient(to bottom, rgba(245,245,240,0.35), transparent);
-    }
-
     /* ── VISION SECTION ── */
     #vision {
       position: relative;
-      height: 300vh;
+      height: 450vh;
     }
 
     #vision-sticky {
@@ -168,49 +81,95 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       object-fit: cover;
     }
 
-    .vision-label {
+    /* ── hero overlay ── */
+    #text-hero {
       position: absolute;
+      top: 50%;
+      left: 50%;
+      translate: -50% -50%;
       z-index: 10;
-      font-size: clamp(0.65rem, 1.1vw, 0.8rem);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      padding: 0.4em 0.9em;
-      border: 1px solid currentColor;
-      top: 2rem;
-      right: 2rem;
-      opacity: 0;
+      text-align: center;
       pointer-events: none;
+      width: 90%;
+      max-width: 700px;
     }
 
-    #label-normal {
-      color: var(--white);
-      background: rgba(0,0,0,0.55);
-      backdrop-filter: blur(4px);
-    }
-    #label-kc {
-      color: var(--accent);
-      background: rgba(0,0,0,0.55);
-      backdrop-filter: blur(4px);
-      border-color: var(--accent);
+    .hero-heading {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 1.25rem;
+      text-shadow: 0 2px 40px rgba(0,0,0,0.98), 0 0 80px rgba(0,0,0,0.7);
     }
 
-    .vision-caption {
+    .hero-sub {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      line-height: 1.7;
+      color: rgba(245,245,240,0.88);
+      text-shadow: 0 1px 20px rgba(0,0,0,0.98), 0 0 40px rgba(0,0,0,0.8);
+    }
+
+    /* ── KC caption overlay (appears after degradation) ── */
+    .vision-text {
       position: absolute;
-      bottom: 3rem;
+      top: calc(var(--nav-h) + 2.5rem);
       left: 50%;
       translate: -50% 0;
       z-index: 10;
       text-align: center;
       pointer-events: none;
-      opacity: 0;
       width: 90%;
-      max-width: 520px;
+      max-width: 580px;
+      background: rgba(0,0,0,0.52);
+      backdrop-filter: blur(6px);
+      padding: 1.5rem 2.5rem;
+      border-radius: 2px;
     }
 
-    .vision-caption p {
-      font-size: clamp(1rem, 1.6vw, 1.2rem);
-      line-height: 1.65;
+    #text-kc { opacity: 0; }
+
+    .vision-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      color: var(--accent);
+    }
+
+    .vision-desc {
+      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+      line-height: 1.75;
       color: rgba(245,245,240,0.85);
+    }
+
+    #scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      translate: -50% 0;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(245,245,240,0.45);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      pointer-events: none;
+      animation: hintFadeIn 1.2s ease 0.4s both;
+    }
+
+    #scroll-hint .arrow {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, rgba(245,245,240,0.45), transparent);
+    }
+
+    @keyframes hintFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
     }
 
     /* ── WHAT IS KC ── */
@@ -343,24 +302,20 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       transition: opacity 0.2s;
     }
     .btn:hover { opacity: 0.85; }
+
+    /* ── REDUCED MOTION ── */
+    @media (prefers-reduced-motion: reduce) {
+      #vision { height: 100vh; }
+      #scroll-hint { display: none; }
+      .symptom-card {
+        opacity: 1;
+        translate: none;
+      }
+    }
   </style>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">{hero.eyebrow}</p>
-      <h1 class="hero-headline">See What<br /><em>We See</em></h1>
-      <p class="hero-sub">{hero.sub}</p>
-    </div>
-    <div class="scroll-hint">
-      Scroll
-      <div class="arrow"></div>
-    </div>
-  </section>
-
   <!-- VISION TRANSITION — animation controlled by GSAP below -->
-  <section id="vision">
+  <section id="vision" aria-label="Vision simulation">
     <div id="vision-sticky">
 
       <svg width="0" height="0" aria-hidden="true" style="position:absolute;overflow:hidden">
@@ -377,17 +332,28 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       <img id="img-warped" class="vision-img" src="/images/normal_hires.jpg" style="filter:url(#kc);opacity:0" alt="" aria-hidden="true" />
       <img id="img-ghost"  class="vision-img" src="/images/normal_hires.jpg" style="opacity:0;mix-blend-mode:screen" alt="" aria-hidden="true" />
 
-      <span class="vision-label" id="label-normal">Normal</span>
-      <span class="vision-label" id="label-kc">Keratoconus</span>
+      <div id="text-hero">
+        <h1 class="hero-heading">{hero.heading}</h1>
+        <p class="hero-sub">{hero.body}</p>
+      </div>
 
-      <div class="vision-caption" id="caption-normal">
-        <p>{vision.captionNormal}</p>
+      <div class="vision-text" id="text-kc">
+        <p class="vision-eyebrow">{vision.labelKC}</p>
+        <p class="vision-desc">{vision.captionKC}</p>
       </div>
-      <div class="vision-caption" id="caption-kc">
-        <p>{vision.captionKC}</p>
+
+      <div id="scroll-hint" aria-hidden="true">
+        Scroll
+        <div class="arrow"></div>
       </div>
+
+      <p class="sr-only">
+        This section is a scroll-driven simulation. As you scroll, the image gradually shifts from normal vision to illustrate how keratoconus distorts sight: irregular warping, ghosting, and blur that glasses cannot correct. Written descriptions continue below.
+      </p>
     </div>
   </section>
+
+  <span id="main-content" tabindex="-1" class="sr-only">Main content</span>
 
   <!-- WHAT IS KC -->
   <section id="what">
@@ -457,63 +423,82 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // ── Hero entrance ──────────────────────────────────────────────
-  const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-  heroTl
-    .to('.hero-eyebrow',    { opacity: 1, y: 0, duration: 0.9, delay: 0.3 }, 0)
-    .from('.hero-headline', { y: 40, duration: 1 }, 0.2)
-    .to('.hero-headline',   { opacity: 1, duration: 1 }, 0.2)
-    .to('.hero-sub',        { opacity: 1, y: 0, duration: 0.8 }, 0.6)
-    .to('.scroll-hint',     { opacity: 1, duration: 0.6 }, 1.1);
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  gsap.to('.scroll-hint .arrow', {
-    scaleY: 0.5,
-    transformOrigin: 'top center',
-    duration: 0.8,
-    repeat: -1,
-    yoyo: true,
-    ease: 'power1.inOut',
-  });
+  if (!prefersReducedMotion) {
+    // ── Scroll hint ──────────────────────────────────────────────
+    gsap.to('#scroll-hint .arrow', {
+      scaleY: 0.5,
+      transformOrigin: 'top center',
+      duration: 0.8,
+      repeat: -1,
+      yoyo: true,
+      ease: 'power1.inOut',
+    });
 
-  // ── Vision transition ──────────────────────────────────────────
-  const kcDisp = document.getElementById('kc-d');
-  const kcBlur = document.getElementById('kc-b');
+    gsap.to('#scroll-hint', {
+      opacity: 0,
+      scrollTrigger: {
+        trigger: '#vision',
+        start: 'top top',
+        end: '+=120',
+        scrub: true,
+      },
+    });
 
-  const visionTl = gsap.timeline({
-    scrollTrigger: {
+    // ── Vision transition ────────────────────────────────────────
+    const kcDisp = document.getElementById('kc-d');
+    const kcBlur = document.getElementById('kc-b');
+
+    const visionTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#vision',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1.5,
+      },
+    });
+
+    visionTl
+      // hero fades out as scroll begins
+      .to('#text-hero', { opacity: 0, duration: 0.18 }, 0)
+      // image degrades once hero is gone
+      .to(kcDisp, { attr: { scale: 8 },          duration: 0.5, ease: 'power1.in' }, 0.18)
+      .to(kcBlur, { attr: { stdDeviation: 0.6 }, duration: 0.5, ease: 'power1.in' }, 0.18)
+      .to('#img-warped', { opacity: 0.35, duration: 0.5  }, 0.18)
+      .to('#img-ghost',  { opacity: 0.6, x: 20, y: 11, duration: 0.4 }, 0.22)
+      // KC caption fades in
+      .to('#text-kc', { opacity: 1, duration: 0.1 }, 0.65)
+      .to({}, { duration: 0.55 });
+
+    // ── Symptom cards stagger ────────────────────────────────────
+    gsap.to('.symptom-card', {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '.symptom-grid',
+        start: 'top 80%',
+      },
+    });
+
+    // ── Nav reveal after vision section ─────────────────────────
+    // onEnter/onLeaveBack instead of toggleClass — toggleClass ties
+    // visibility to the "active" zone and hides the nav once the
+    // vision section fully scrolls past.
+    ScrollTrigger.create({
       trigger: '#vision',
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: 1.5,
-    },
-  });
+      start: 'bottom 80%',
+      onEnter:     () => document.getElementById('site-nav')?.classList.add('nav-visible'),
+      onLeaveBack: () => document.getElementById('site-nav')?.classList.remove('nav-visible'),
+    });
 
-  visionTl
-    // Phase 1: reveal the crisp label
-    .to('#label-normal',   { opacity: 1, duration: 0.15 }, 0)
-    .to('#caption-normal', { opacity: 1, duration: 0.15 }, 0)
-    // Phase 2: degrade — subtle distortion, mild blur, ghost
-    .to('#label-normal',   { opacity: 0, duration: 0.08 }, 0.22)
-    .to('#caption-normal', { opacity: 0, duration: 0.08 }, 0.22)
-    .to(kcDisp, { attr: { scale: 8 },          duration: 0.55, ease: 'power1.in' }, 0.2)
-    .to(kcBlur, { attr: { stdDeviation: 0.6 }, duration: 0.55, ease: 'power1.in' }, 0.2)
-    .to('#img-warped', { opacity: 0.35, duration: 0.55 }, 0.2)
-    .to('#img-ghost',  { opacity: 0.6, x: 20, y: 11, duration: 0.45 }, 0.25)
-    // Phase 3: surface KC label
-    .to('#label-kc',   { opacity: 1, duration: 0.12 }, 0.75)
-    .to('#caption-kc', { opacity: 1, duration: 0.12 }, 0.78)
-    .to({}, { duration: 0.1 });
-
-  // ── Symptom cards stagger ──────────────────────────────────────
-  gsap.to('.symptom-card', {
-    opacity: 1,
-    y: 0,
-    duration: 0.6,
-    stagger: 0.1,
-    ease: 'power2.out',
-    scrollTrigger: {
-      trigger: '.symptom-grid',
-      start: 'top 80%',
-    },
-  });
+  } else {
+    document.querySelectorAll<HTMLElement>('.symptom-card').forEach(el => {
+      el.style.opacity = '1';
+      el.style.translate = 'none';
+    });
+  }
 </script>
