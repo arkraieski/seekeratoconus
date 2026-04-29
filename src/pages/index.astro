@@ -54,7 +54,7 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ---
 
-<Base title="Keratoconus — See What We See">
+<Base title="See Keratoconus">
 
   <style>
     /* ── VISION SECTION ── */
@@ -465,6 +465,7 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       // image degrades once hero is gone
       .to(kcDisp, { attr: { scale: 8 },          duration: 0.5, ease: 'power1.in' }, 0.18)
       .to(kcBlur, { attr: { stdDeviation: 0.6 }, duration: 0.5, ease: 'power1.in' }, 0.18)
+      .to('#img-clean',  { filter: 'blur(3px)',   duration: 0.5, ease: 'power1.in' }, 0.18)
       .to('#img-warped', { opacity: 0.35, duration: 0.5  }, 0.18)
       .to('#img-ghost',  { opacity: 0.6, x: 20, y: 11, duration: 0.4 }, 0.22)
       // KC caption fades in

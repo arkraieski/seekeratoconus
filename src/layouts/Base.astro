@@ -1,5 +1,5 @@
 ---
-const { title = 'Keratoconus — See What We See' } = Astro.props;
+const { title = 'See Keratoconus' } = Astro.props;
 const path = Astro.url.pathname;
 const isHome = path === '/';
 ---
@@ -156,7 +156,7 @@ const isHome = path === '/';
   <a href="#main-content" class="skip-nav">Skip to content</a>
 
   <nav id="site-nav" class={isHome ? 'nav-reveal' : ''} aria-label="Site navigation">
-    <a href="/">KC Awareness</a>
+    <a href="/">See Keratoconus</a>
     <div id="nav-links">
       <a href="/about" class={path.startsWith('/about') ? 'active' : ''}>About</a>
       <a href="/advocacy" class={path.startsWith('/advocacy') ? 'active' : ''}>Advocacy</a>
@@ -167,7 +167,7 @@ const isHome = path === '/';
 
   <footer>
     <slot name="footer-extra" />
-    <p>&copy; 2026 · Keratoconus awareness. Not medical advice.</p>
+    <p>&copy; 2026 · See Keratoconus. Not medical advice.</p>
   </footer>
 
 
