@@ -5,13 +5,16 @@ title: About — See Keratoconus
 
 # About
 
-A few sentences here about who you are — patient, advocate, both.
+
 
 ## My experience with KC
 
-Your story here. What was your diagnosis like? How long did it take? What changed?
+I thought the eye test machine at the DMV was broken. But it turned out that I was pretty lucky the state subsequently insisted I get an eye exam.
 
-A second paragraph if you want more space to say something.
+
+My diagnosis was shocking to me but also clarifying. 
+
+
 
 ## Why I built this
 

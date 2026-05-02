@@ -5,18 +5,17 @@ title: Advocacy — See Keratoconus
 
 # My Approach to Advocacy
 
-A sentence or two on what drives you — what advocacy means to you personally.
+My life's experience (including keratoconus but not limited to it) has lead me to understand how the world is designed for such a narrow set of humanity.
 
-## Why awareness matters
+It is clear to me that we must fight ableism. Structurally, modern society is not set up to value all lives equally. 
 
-Your thoughts on the gap between how common KC is and how little most people know about it.
+## Issues
 
-What you wish someone had told you — or told your doctors — earlier.
+- We must lower the "disability tax!" There are [Well documented extra costs](https://www.nationaldisabilityinstitute.org/wp-content/uploads/2020/10/extra-costs-living-with-disability-brief.pdf) of living with disabilities in the US
+- Healthcare should be a human right, not a lever for capitalist elites to depress wages and extract yield
+- "Return to Office" == "Fire our disabled employees": One-size-fits-most office environments exclude employees with various sensory needs, difficulty driving, and more
+- Racial and geographic inequity in healthcare is unacceptable (once again, healthcare is a human right)
+- Build communities and infrastructure for people, not cars. Life shouldn't functionally end if you can't drive.
+- As companies look to use AI agents based on LLMs, ableist language turns to ableist action at scale
 
-## What I try to do
-
-How you approach conversations about KC — with friends, family, doctors, or online.
-
-## What you can do
-
-Concrete things a reader can do: share this site, mention KC to their eye doctor, donate to NKCF, etc.
+This is all about building a society where we are guaranteed to value and support the lives of you and your family into the future.
