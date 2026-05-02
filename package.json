@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "astro": "^6.1.9",
-    "gsap": "^3.12.7"
+    "gsap": "^3.12.7",
+    "rehype-external-links": "^3.0.0"
   }
 }
