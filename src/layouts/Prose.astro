@@ -44,6 +44,36 @@ const { frontmatter } = Astro.props;
       margin-bottom: 0.85rem;
     }
     #prose p:last-child { margin-bottom: 0; }
+
+    #prose ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 0.85rem;
+    }
+    #prose ul li {
+      font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+      line-height: 1.85;
+      color: rgba(245,245,240,0.7);
+      padding-left: 1.25em;
+      margin-bottom: 0.65rem;
+      position: relative;
+    }
+    #prose ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      opacity: 0.6;
+    }
+
+    #prose a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: rgba(0,180,216,0.35);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.15s;
+    }
+    #prose a:hover { text-decoration-color: var(--accent); }
   </style>
 
   <main id="prose">
