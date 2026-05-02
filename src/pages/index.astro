@@ -372,13 +372,13 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
     <h2>{what.heading}</h2>
     <p>
       {what.para1}
-      <a href="https://nkcf.org/about-keratoconus/" class="cite" target="_blank" rel="noopener noreferrer">NKCF</a>
-      <a href="https://www.mayoclinic.org/diseases-conditions/keratoconus/symptoms-causes/syc-20351352" class="cite" target="_blank" rel="noopener noreferrer">Mayo Clinic</a>
+      <a href="https://nkcf.org/about-keratoconus/" class="cite" target="_blank" rel="noopener noreferrer" aria-label="NKCF (opens in new tab)">NKCF</a>
+      <a href="https://www.mayoclinic.org/diseases-conditions/keratoconus/symptoms-causes/syc-20351352" class="cite" target="_blank" rel="noopener noreferrer" aria-label="Mayo Clinic (opens in new tab)">Mayo Clinic</a>
     </p>
     <p>
       {what.para2}
-      <a href="https://www.mayoclinic.org/diseases-conditions/keratoconus/diagnosis-treatment/drc-20351357" class="cite" target="_blank" rel="noopener noreferrer">Mayo Clinic</a>
-      <a href="https://nkcf.org/about-keratoconus/" class="cite" target="_blank" rel="noopener noreferrer">NKCF</a>
+      <a href="https://www.mayoclinic.org/diseases-conditions/keratoconus/diagnosis-treatment/drc-20351357" class="cite" target="_blank" rel="noopener noreferrer" aria-label="Mayo Clinic (opens in new tab)">Mayo Clinic</a>
+      <a href="https://nkcf.org/about-keratoconus/" class="cite" target="_blank" rel="noopener noreferrer" aria-label="NKCF (opens in new tab)">NKCF</a>
     </p>
   </section>
 
@@ -391,7 +391,7 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
         {symptoms.map(s => (
           <div class="symptom-card">
             <h3>{s.heading}</h3>
-            <p>{s.body} <a href="https://nkcf.org/about-keratoconus/keratoconus-symptoms/" class="cite" target="_blank" rel="noopener noreferrer">NKCF</a></p>
+            <p>{s.body} <a href="https://nkcf.org/about-keratoconus/keratoconus-symptoms/" class="cite" target="_blank" rel="noopener noreferrer" aria-label="NKCF (opens in new tab)">NKCF</a></p>
           </div>
         ))}
       </div>
@@ -412,7 +412,7 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
     <p class="section-label">Take action</p>
     <h2>{cta.heading}</h2>
     <p>{cta.body}</p>
-    <a class="btn" href="https://www.nkcf.org" target="_blank" rel="noopener">
+    <a class="btn" href="https://www.nkcf.org" target="_blank" rel="noopener" aria-label="National Keratoconus Foundation (opens in new tab)">
       National Keratoconus Foundation
     </a>
   </section>
@@ -420,9 +420,9 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
   <Fragment slot="footer-extra">
     <p style="font-size:0.7rem;opacity:0.5">
       Vision simulation based on
-      <a href="https://www.flickr.com/photos/sprengben/5126320106/" target="_blank" rel="noopener">&ldquo;Times Square Rain Dance&rdquo; by Spreng Ben</a>,
-      used under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" rel="noopener">CC BY-NC-SA 3.0</a>.
-      KC simulation adapted from <a href="https://www.livingwithkeratoconus.com" target="_blank" rel="noopener">livingwithkeratoconus.com</a>.
+      <a href="https://www.flickr.com/photos/sprengben/5126320106/" target="_blank" rel="noopener" aria-label="&ldquo;Times Square Rain Dance&rdquo; by Spreng Ben (opens in new tab)">&ldquo;Times Square Rain Dance&rdquo; by Spreng Ben</a>,
+      used under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" rel="noopener" aria-label="CC BY-NC-SA 3.0 (opens in new tab)">CC BY-NC-SA 3.0</a>.
+      KC simulation adapted from <a href="https://www.livingwithkeratoconus.com" target="_blank" rel="noopener" aria-label="livingwithkeratoconus.com (opens in new tab)">livingwithkeratoconus.com</a>.
     </p>
   </Fragment>
 
