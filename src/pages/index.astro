@@ -8,7 +8,7 @@ import Base from '../layouts/Base.astro';
 
 const hero = {
   heading: 'See What We See',
-  body: 'Keratoconus affects roughly 1 in 2,000 people — most misdiagnosed for years. Scroll to experience what they see.',
+  body: 'Keratoconus affects roughly 1 in 2,000 people. And it is possible not to know it for years. Scroll to see a representation of it.',
 };
 
 const vision = {
@@ -37,6 +37,15 @@ const symptoms = [
 const cta = {
   heading: 'Early diagnosis changes everything',
   body: "KC is often misdiagnosed as astigmatism for years. If any of this looked familiar, ask your eye doctor about corneal topography.",
+};
+
+const plots = {
+  heading: 'Seeing it another way',
+  intro: "That simulation was an approximation. Here's another attempt from during my recovery from corneal cross-linking surgery.",
+  labelNormal: 'What most people see',
+  captionNormal: 'Hopefully you only see one of each point.',
+  labelKC: 'What I saw',
+  captionKC: 'The same plot, as I saw it recovering from surgery. Every point, tripled.',
 };
 
 // Add sections here to insert prose between Symptoms and the CTA.
@@ -323,6 +332,70 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       }
     }
 
+    /* ── PLOTS ── */
+    #plots-intro {
+      padding: 10rem 2rem 5rem;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    #plots-intro h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 2rem;
+    }
+    #plots-intro p {
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      line-height: 1.8;
+      color: rgba(245,245,240,0.7);
+    }
+    #plots-pin { height: 420vh; }
+    #plots-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.75rem;
+      padding: calc(var(--nav-h) + 2rem) 2rem 2rem;
+    }
+    .plots-frame {
+      position: relative;
+      width: min(720px, 90vw);
+      aspect-ratio: 720 / 500;
+    }
+    .plot-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 3px;
+    }
+    #plot-kc { opacity: 0; }
+    #plot-caption {
+      position: relative;
+      text-align: center;
+      width: min(560px, 90vw);
+      min-height: 3.5rem;
+    }
+    .plot-cap { position: absolute; left: 0; right: 0; }
+    #plot-cap-kc { opacity: 0; }
+    .plot-cap-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .plot-cap-text {
+      font-size: clamp(0.9rem, 1.3vw, 1rem);
+      line-height: 1.7;
+      color: rgba(245,245,240,0.7);
+    }
+
     /* ── REDUCED MOTION ── */
     @media (prefers-reduced-motion: reduce) {
       #vision { height: 100vh; }
@@ -331,6 +404,14 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
         opacity: 1;
         translate: none;
       }
+      #plots-pin { height: auto; }
+      #plots-sticky { position: static; height: auto; gap: 2rem; padding: 2rem; }
+      .plots-frame { aspect-ratio: auto; }
+      .plot-img { position: static; height: auto; width: 100%; display: block; }
+      #plot-kc { opacity: 1; }
+      .plot-cap { position: static; margin-top: 0.75rem; }
+      #plot-cap-kc { opacity: 1; }
+      #plot-caption { min-height: auto; display: flex; flex-direction: column; gap: 2rem; }
     }
   </style>
 
@@ -379,6 +460,34 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
   </section>
 
   <span id="main-content" tabindex="-1" class="sr-only">Main content</span>
+
+  <!-- PLOTS: another way to see it -->
+  <section id="plots-intro">
+    <p class="section-label">Another look</p>
+    <h2>{plots.heading}</h2>
+    <p>{plots.intro}</p>
+  </section>
+
+  <section id="plots-pin" aria-label="Scatter plot comparison: normal vision vs keratoconus">
+    <div id="plots-sticky">
+      <div class="plots-frame">
+        <img id="plot-normal" class="plot-img" src="/images/plot_normal.png"
+             alt="Scatter plot with normal vision: each data point is a single dot." />
+        <img id="plot-kc" class="plot-img" src="/images/plot_kc.png"
+             alt="The same scatter plot as seen with keratoconus: each data point appears as three overlapping dots." />
+      </div>
+      <div id="plot-caption">
+        <div id="plot-cap-normal" class="plot-cap">
+          <p class="plot-cap-eyebrow">{plots.labelNormal}</p>
+          <p class="plot-cap-text">{plots.captionNormal}</p>
+        </div>
+        <div id="plot-cap-kc" class="plot-cap">
+          <p class="plot-cap-eyebrow">{plots.labelKC}</p>
+          <p class="plot-cap-text">{plots.captionKC}</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- WHAT IS KC -->
   <section id="what">
@@ -499,6 +608,23 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       // KC caption fades in near the end of degradation
       .to('#text-kc',    { opacity: 1, duration: 0.07 }, 1.00)
       .to({}, { duration: 0.55 });
+
+    // ── Plot crossfade ───────────────────────────────────────────
+    const plotTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#plots-pin',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1,
+      },
+    });
+    plotTl
+      .to({}, { duration: 0.4 })
+      .to('#plot-normal',     { opacity: 0, duration: 0.2 }, '>')
+      .to('#plot-kc',         { opacity: 1, duration: 0.2 }, '<')
+      .to('#plot-cap-normal', { opacity: 0, duration: 0.15 }, '<')
+      .to('#plot-cap-kc',     { opacity: 1, duration: 0.15 }, '<0.05')
+      .to({}, { duration: 0.4 });
 
     // ── Symptom cards stagger ────────────────────────────────────
     gsap.to('.symptom-card', {
