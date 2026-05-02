@@ -12,8 +12,10 @@ const hero = {
 };
 
 const vision = {
-  labelKC:   'Keratoconus',
-  captionKC: "For someone with keratoconus, light scatters, halos form, and even the best glasses can't fully correct it.",
+  labelNormal:   'Normal Vision',
+  captionNormal: 'The world as most people see it — sharp, stable, and fully correctable.',
+  labelKC:       'Keratoconus',
+  captionKC:     "For someone with keratoconus, light scatters, halos form, and even the best glasses can't fully correct it.",
 };
 
 const what = {
@@ -60,7 +62,7 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
     /* ── VISION SECTION ── */
     #vision {
       position: relative;
-      height: 450vh;
+      height: 700vh;
     }
 
     #vision-sticky {
@@ -92,6 +94,10 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       pointer-events: none;
       width: 90%;
       max-width: 700px;
+      background: rgba(0,0,0,0.38);
+      backdrop-filter: blur(6px);
+      padding: 2.5rem 3rem;
+      border-radius: 3px;
     }
 
     .hero-heading {
@@ -127,7 +133,7 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       border-radius: 2px;
     }
 
-    #text-kc { opacity: 0; }
+    #text-normal, #text-kc { opacity: 0; }
 
     .vision-eyebrow {
       font-size: 0.68rem;
@@ -153,9 +159,9 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       flex-direction: column;
       align-items: center;
       gap: 0.5rem;
-      color: rgba(245,245,240,0.45);
+      color: rgba(245,245,240,0.75);
       font-size: 0.7rem;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       pointer-events: none;
       animation: hintFadeIn 1.2s ease 0.4s both;
@@ -164,7 +170,7 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
     #scroll-hint .arrow {
       width: 1px;
       height: 48px;
-      background: linear-gradient(to bottom, rgba(245,245,240,0.45), transparent);
+      background: linear-gradient(to bottom, rgba(245,245,240,0.7), transparent);
     }
 
     @keyframes hintFadeIn {
@@ -337,6 +343,11 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
         <p class="hero-sub">{hero.body}</p>
       </div>
 
+      <div class="vision-text" id="text-normal">
+        <p class="vision-eyebrow">{vision.labelNormal}</p>
+        <p class="vision-desc">{vision.captionNormal}</p>
+      </div>
+
       <div class="vision-text" id="text-kc">
         <p class="vision-eyebrow">{vision.labelKC}</p>
         <p class="vision-desc">{vision.captionKC}</p>
@@ -461,15 +472,18 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
 
     visionTl
       // hero fades out as scroll begins
-      .to('#text-hero', { opacity: 0, duration: 0.18 }, 0)
-      // image degrades once hero is gone
-      .to(kcDisp, { attr: { scale: 8 },          duration: 0.5, ease: 'power1.in' }, 0.18)
-      .to(kcBlur, { attr: { stdDeviation: 0.6 }, duration: 0.5, ease: 'power1.in' }, 0.18)
-      .to('#img-clean',  { filter: 'blur(3px)',   duration: 0.5, ease: 'power1.in' }, 0.18)
-      .to('#img-warped', { opacity: 0.35, duration: 0.5  }, 0.18)
-      .to('#img-ghost',  { opacity: 0.6, x: 20, y: 11, duration: 0.4 }, 0.22)
-      // KC caption fades in
-      .to('#text-kc', { opacity: 1, duration: 0.1 }, 0.65)
+      .to('#text-hero',    { opacity: 0, duration: 0.12 }, 0)
+      // "Normal" label appears — holds for a full viewport+ before fading
+      .to('#text-normal',  { opacity: 1, duration: 0.07 }, 0.12)
+      .to('#text-normal',  { opacity: 0, duration: 0.07 }, 0.55)
+      // image degrades
+      .to(kcDisp, { attr: { scale: 8 },          duration: 0.45, ease: 'power1.in' }, 0.62)
+      .to(kcBlur, { attr: { stdDeviation: 0.6 }, duration: 0.45, ease: 'power1.in' }, 0.62)
+      .to('#img-clean',  { filter: 'blur(3px)',   duration: 0.45, ease: 'power1.in' }, 0.62)
+      .to('#img-warped', { opacity: 0.35,          duration: 0.45 }, 0.62)
+      .to('#img-ghost',  { opacity: 0.6, x: 20, y: 11, duration: 0.36 }, 0.66)
+      // KC caption fades in near the end of degradation
+      .to('#text-kc',    { opacity: 1, duration: 0.07 }, 1.00)
       .to({}, { duration: 0.55 });
 
     // ── Symptom cards stagger ────────────────────────────────────
@@ -497,6 +511,18 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
     });
 
   } else {
+    // Show KC effect as a static image — no animation, but users still see what KC looks like
+    const kcDisp = document.getElementById('kc-d');
+    const kcBlur = document.getElementById('kc-b');
+    if (kcDisp) kcDisp.setAttribute('scale', '8');
+    if (kcBlur) kcBlur.setAttribute('stdDeviation', '0.6');
+
+    const imgWarped = document.getElementById('img-warped') as HTMLElement;
+    const imgGhost  = document.getElementById('img-ghost')  as HTMLElement;
+    if (imgWarped) imgWarped.style.opacity = '0.35';
+    if (imgGhost)  { imgGhost.style.opacity = '0.6'; imgGhost.style.transform = 'translate(20px, 11px)'; }
+
+
     document.querySelectorAll<HTMLElement>('.symptom-card').forEach(el => {
       el.style.opacity = '1';
       el.style.translate = 'none';
