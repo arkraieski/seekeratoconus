@@ -5,12 +5,11 @@ title: About — See Keratoconus
 
 # About
 
-
+Hi, my name is Alex, and I built this site to share my experience with keratoconus. It has been a tough journey at times, but there are a lot of resources available.
 
 ## My experience with KC
 
 I thought the eye test machine at the DMV was broken. But it turned out that I was pretty lucky the state subsequently insisted I get an eye exam.
-
 
 My diagnosis was shocking to me but also clarifying. Many separate experiences, from frequent headaches to a car accident at night years ago suddenly made a little more sense. But acceptance of my diagnosis came in stages. At times, it felt like I was glad I caught it "in time", at other times panicked about what I was about to face. And sometimes I felt total rage at myself for not having my vision checked more thoroughly sooner.
 

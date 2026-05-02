@@ -86,19 +86,28 @@ const isHome = path === '/';
       transition: opacity 0.4s ease;
     }
 
-    /* Home page: starts hidden, JS adds .nav-visible after vision section */
+    /* Home page: starts hidden, JS adds .nav-visible after vision section.
+       visibility (not just opacity) keeps hidden links out of the tab order
+       and the AT tree. The 0.4s linear delay on visibility lets opacity finish
+       fading before the element disappears, so the reverse transition (visible
+       to hidden, on scroll-up) still animates cleanly. */
     #site-nav.nav-reveal {
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
+      transition: opacity 0.4s ease, visibility 0s linear 0.4s;
     }
     #site-nav.nav-reveal.nav-visible {
       opacity: 1;
+      visibility: visible;
       pointer-events: auto;
+      transition: opacity 0.4s ease, visibility 0s linear 0s;
     }
 
     @media (prefers-reduced-motion: reduce) {
       #site-nav.nav-reveal {
         opacity: 1 !important;
+        visibility: visible !important;
         pointer-events: auto !important;
         transition: none;
       }

@@ -67,6 +67,11 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
 
 <Base title="See Keratoconus">
 
+  <style is:global>
+    main#main-content { display: block; }
+    main#main-content:focus { outline: none; }
+  </style>
+
   <style>
     /* ── VISION SECTION ── */
     #vision {
@@ -415,6 +420,8 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
     }
   </style>
 
+  <main id="main-content" tabindex="-1">
+
   <!-- VISION TRANSITION — animation controlled by GSAP below -->
   <section id="vision" aria-label="Vision simulation">
     <div id="vision-sticky">
@@ -429,7 +436,7 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
         </defs>
       </svg>
 
-      <img id="img-clean"  class="vision-img" src="/images/normal_hires.jpg" alt="Normal vision" />
+      <img id="img-clean"  class="vision-img" src="/images/normal_hires.jpg" alt="" aria-hidden="true" />
       <img id="img-warped" class="vision-img" src="/images/normal_hires.jpg" style="filter:url(#kc);opacity:0" alt="" aria-hidden="true" />
       <img id="img-ghost"  class="vision-img" src="/images/normal_hires.jpg" style="opacity:0;mix-blend-mode:screen" alt="" aria-hidden="true" />
 
@@ -438,12 +445,16 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
         <p class="hero-sub">{hero.body}</p>
       </div>
 
-      <div class="vision-text" id="text-normal">
+      <p class="sr-only">
+        A scroll-driven photograph below simulates keratoconus vision: as the page scrolls, the image warps, halos bloom around lights, ghosted copies overlay the scene, and detail blurs in ways that glasses cannot correct. A plain-text description of the condition follows further down the page.
+      </p>
+
+      <div class="vision-text" id="text-normal" aria-hidden="true">
         <p class="vision-eyebrow">{vision.labelNormal}</p>
         <p class="vision-desc">{vision.captionNormal}</p>
       </div>
 
-      <div class="vision-text" id="text-kc">
+      <div class="vision-text" id="text-kc" aria-hidden="true">
         <p class="vision-eyebrow">{vision.labelKC}</p>
         <p class="vision-desc">{vision.captionKC}</p>
       </div>
@@ -452,14 +463,8 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
         Scroll
         <div class="arrow"></div>
       </div>
-
-      <p class="sr-only">
-        This section is a scroll-driven simulation. As you scroll, the image gradually shifts from normal vision to illustrate how keratoconus distorts sight: irregular warping, ghosting, and blur that glasses cannot correct. Written descriptions continue below.
-      </p>
     </div>
   </section>
-
-  <span id="main-content" tabindex="-1" class="sr-only">Main content</span>
 
   <!-- PLOTS: another way to see it -->
   <section id="plots-intro">
@@ -468,13 +473,14 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
     <p>{plots.intro}</p>
   </section>
 
-  <section id="plots-pin" aria-label="Scatter plot comparison: normal vision vs keratoconus">
-    <div id="plots-sticky">
+  <section id="plots-pin" aria-label="Scatter plot comparison">
+    <p class="sr-only">
+      Two scatter plots are crossfaded as you scroll. With normal vision, every data point is a single dot. With the author's vision while recovering from corneal cross-linking surgery, the same plot appears with every data point tripled into three overlapping dots.
+    </p>
+    <div id="plots-sticky" aria-hidden="true">
       <div class="plots-frame">
-        <img id="plot-normal" class="plot-img" src="/images/plot_normal.png"
-             alt="Scatter plot with normal vision: each data point is a single dot." />
-        <img id="plot-kc" class="plot-img" src="/images/plot_kc.png"
-             alt="The same scatter plot as seen with keratoconus: each data point appears as three overlapping dots." />
+        <img id="plot-normal" class="plot-img" src="/images/plot_normal.png" alt="" />
+        <img id="plot-kc" class="plot-img" src="/images/plot_kc.png" alt="" />
       </div>
       <div id="plot-caption">
         <div id="plot-cap-normal" class="plot-cap">
@@ -539,6 +545,8 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       National Keratoconus Foundation
     </a>
   </section>
+
+  </main>
 
   <Fragment slot="footer-extra">
     <p style="font-size:0.7rem;opacity:0.5">
