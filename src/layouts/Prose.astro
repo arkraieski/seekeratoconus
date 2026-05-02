@@ -1,0 +1,53 @@
+---
+import Base from './Base.astro';
+const { frontmatter } = Astro.props;
+---
+
+<Base title={frontmatter.title}>
+  <style is:global>
+    #prose {
+      padding: calc(var(--nav-h) + 6rem) 2rem 10rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    #prose h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    /* intro: first paragraph immediately after h1 */
+    #prose h1 + p {
+      font-size: clamp(1rem, 1.6vw, 1.2rem);
+      color: rgba(245,245,240,0.6);
+      line-height: 1.75;
+      margin-bottom: 4.5rem;
+      max-width: 52ch;
+    }
+
+    #prose h2 {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.85rem;
+      margin-top: 3rem;
+    }
+
+    #prose p {
+      font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+      line-height: 1.85;
+      color: rgba(245,245,240,0.7);
+      margin-bottom: 0.85rem;
+    }
+    #prose p:last-child { margin-bottom: 0; }
+  </style>
+
+  <main id="prose">
+    <span id="main-content" tabindex="-1" class="sr-only"></span>
+    <slot />
+  </main>
+</Base>
