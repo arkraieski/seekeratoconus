@@ -70,6 +70,18 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
   <style is:global>
     main#main-content { display: block; }
     main#main-content:focus { outline: none; }
+
+    /* Mobile scroll-snap: each static content section becomes a "stop" so
+       inertial swipes can't blow past a heading + paragraph in one flick.
+       Proximity (not mandatory) so mid-section reading is not fought.
+       The scrolly sections (#vision, #plots-pin) deliberately have no
+       snap-align — GSAP needs free scroll inside them. */
+    @media (max-width: 640px) {
+      html {
+        scroll-snap-type: y proximity;
+        scroll-padding-top: var(--nav-h);
+      }
+    }
   </style>
 
   <style>
@@ -447,6 +459,14 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
         display: flex;
         flex-direction: column;
         justify-content: center;
+      }
+
+      #plots-intro,
+      #what,
+      #symptoms,
+      #cta {
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
       }
     }
 
