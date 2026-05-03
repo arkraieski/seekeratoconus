@@ -706,8 +706,8 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       .to('#img-clean',  { filter: 'blur(3px)',   duration: 0.45, ease: 'power1.in' }, 0.62)
       .to('#img-warped', { opacity: 0.35,          duration: 0.45 }, 0.62)
       .to('#img-ghost',  { opacity: 0.6, x: 20, y: 11, duration: 0.36 }, 0.66)
-      // KC caption fades in near the end of degradation
-      .to('#text-kc',    { opacity: 1, duration: 0.07 }, 1.00)
+      // KC caption fades in mid-degradation so it dwells longer on mobile flicks
+      .to('#text-kc',    { opacity: 1, duration: 0.07 }, 0.85)
       .to({}, { duration: 0.55 });
 
     // ── Plot crossfade ───────────────────────────────────────────
