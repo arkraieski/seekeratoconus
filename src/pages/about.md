@@ -14,9 +14,9 @@ I thought the eye test machine at the DMV was broken. But it turned out that I w
 
 My diagnosis was shocking to me but also clarifying. Many separate experiences, from frequent headaches to a car accident at night years ago suddenly made a little more sense. But acceptance of my diagnosis came in stages. At times, it felt like I was glad I caught it "in time", at other times panicked about what I was about to face. And sometimes I felt total rage at myself for not having my vision checked more thoroughly sooner.
 
-Prior to my diagnosis, I really needed glasses for years. But there's nothing I can do about that lost time, and beating myself up is not beneficial. But it can be hard to resist that temptation sometimes.
+Prior to my diagnosis at 28, I really needed glasses for years. But there's nothing I can do about that lost time, and beating myself up is not beneficial. But it can be hard to resist that temptation sometimes.
 
-Even though my journey hasn't been the smoothest, I think keratoconus has ultimately led me to bring a renewed sense of aspirational excellence to my software engineering and data science work. I started to more consciously prioritize user empathy and accessibility in my applications.
+Even though my journey hasn't been the smoothest, I think keratoconus has ultimately led me to bring a **renewed sense of motivation and aspirational excellence to my software engineering and data science work**. I started to more consciously prioritize user empathy and accessibility in my applications.
 
 Although it's [not a cure for keratoconus](https://nkcf.org/answering_your_questions_about_crosslinking/), I'm very thankful that corneal crosslinking has been able to stabilize my vision.
 
