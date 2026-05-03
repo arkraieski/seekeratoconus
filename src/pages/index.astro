@@ -397,36 +397,49 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       }
     }
 
-    /* ── PLOTS ── */
-    #plots-intro {
-      padding: 10rem 2rem 5rem;
-      max-width: 760px;
-      margin: 0 auto;
+    /* ── PLOTS ──
+       The intro text and the two plots all live inside the same sticky pin
+       so a single scrub timeline owns the full "read the setup, then see
+       it" beat. Both layers (#plots-intro-overlay and .plots-visual) are
+       absolutely positioned over the sticky stage so GSAP can crossfade
+       between them. */
+    #plots-pin { height: 650vh; }
+    #plots-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
     }
-    #plots-intro h2 {
+
+    #plots-intro-overlay,
+    .plots-visual {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--nav-h) + 2rem) 2rem 2rem;
+    }
+
+    #plots-intro-overlay > * {
+      width: 100%;
+      max-width: 760px;
+    }
+    #plots-intro-overlay h2 {
       font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 1.15;
       margin-bottom: 2rem;
     }
-    #plots-intro p {
+    #plots-intro-overlay p {
       font-size: clamp(1rem, 1.5vw, 1.15rem);
       line-height: 1.8;
       color: rgba(245,245,240,0.7);
     }
-    #plots-pin { height: 420vh; }
-    #plots-sticky {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1.75rem;
-      padding: calc(var(--nav-h) + 2rem) 2rem 2rem;
-    }
+
+    .plots-visual { gap: 1.75rem; }
+
     .plots-frame {
       position: relative;
       width: min(720px, 90vw);
@@ -439,7 +452,7 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       height: 100%;
       border-radius: 3px;
     }
-    #plot-kc { opacity: 0; }
+    #plot-normal, #plot-kc { opacity: 0; }
     #plot-caption {
       position: relative;
       text-align: center;
@@ -447,7 +460,7 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       min-height: 3.5rem;
     }
     .plot-cap { position: absolute; left: 0; right: 0; }
-    #plot-cap-kc { opacity: 0; }
+    #plot-cap-normal, #plot-cap-kc { opacity: 0; }
     .plot-cap-eyebrow {
       font-size: 0.68rem;
       letter-spacing: 0.25em;
@@ -467,7 +480,6 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
        the reader past an entire heading + paragraph. min-height + flex
        centering makes each section a deliberate "stop." */
     @media (max-width: 640px) {
-      #plots-intro,
       #what,
       #cta {
         min-height: 100svh;
@@ -478,7 +490,6 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
         justify-content: center;
       }
 
-      #plots-intro,
       #what,
       #symptoms {
         scroll-snap-align: start;
@@ -495,12 +506,18 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
         translate: none;
       }
       #plots-pin { height: auto; }
-      #plots-sticky { position: static; height: auto; gap: 2rem; padding: 2rem; }
+      #plots-sticky { position: static; height: auto; }
+      #plots-intro-overlay,
+      .plots-visual {
+        position: static;
+        padding: 4rem 2rem 2rem;
+        gap: 2rem;
+      }
       .plots-frame { aspect-ratio: auto; }
       .plot-img { position: static; height: auto; width: 100%; display: block; }
-      #plot-kc { opacity: 1; }
+      #plot-normal, #plot-kc { opacity: 1; }
       .plot-cap { position: static; margin-top: 0.75rem; }
-      #plot-cap-kc { opacity: 1; }
+      #plot-cap-normal, #plot-cap-kc { opacity: 1; }
       #plot-caption { min-height: auto; display: flex; flex-direction: column; gap: 2rem; }
     }
   </style>
@@ -554,30 +571,32 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
     </div>
   </section>
 
-  <!-- PLOTS: another way to see it -->
-  <section id="plots-intro">
-    <p class="section-label">Another look</p>
-    <h2>{plots.heading}</h2>
-    <p>{plots.intro}</p>
-  </section>
-
-  <section id="plots-pin" aria-label="Scatter plot comparison">
-    <p class="sr-only">
-      Two scatter plots are crossfaded as you scroll. With normal vision, every data point is a single dot. With the author's vision while recovering from corneal cross-linking surgery, the same plot appears with every data point tripled into three overlapping dots.
-    </p>
-    <div id="plots-sticky" aria-hidden="true">
-      <div class="plots-frame">
-        <img id="plot-normal" class="plot-img" src="/images/plot_normal.png" alt="" />
-        <img id="plot-kc" class="plot-img" src="/images/plot_kc.png" alt="" />
+  <!-- PLOTS: intro text and crossfade share one sticky pin so the
+       narrative beat is uninterrupted on mobile. -->
+  <section id="plots-pin" aria-labelledby="plots-heading">
+    <div id="plots-sticky">
+      <div id="plots-intro-overlay">
+        <p class="section-label">Another look</p>
+        <h2 id="plots-heading">{plots.heading}</h2>
+        <p>{plots.intro}</p>
       </div>
-      <div id="plot-caption">
-        <div id="plot-cap-normal" class="plot-cap">
-          <p class="plot-cap-eyebrow">{plots.labelNormal}</p>
-          <p class="plot-cap-text">{plots.captionNormal}</p>
+      <p class="sr-only">
+        Two scatter plots are crossfaded as you scroll. With normal vision, every data point is a single dot. With the author's vision while recovering from corneal cross-linking surgery, the same plot appears with every data point tripled into three overlapping dots.
+      </p>
+      <div class="plots-visual" aria-hidden="true">
+        <div class="plots-frame">
+          <img id="plot-normal" class="plot-img" src="/images/plot_normal.png" alt="" />
+          <img id="plot-kc" class="plot-img" src="/images/plot_kc.png" alt="" />
         </div>
-        <div id="plot-cap-kc" class="plot-cap">
-          <p class="plot-cap-eyebrow">{plots.labelKC}</p>
-          <p class="plot-cap-text">{plots.captionKC}</p>
+        <div id="plot-caption">
+          <div id="plot-cap-normal" class="plot-cap">
+            <p class="plot-cap-eyebrow">{plots.labelNormal}</p>
+            <p class="plot-cap-text">{plots.captionNormal}</p>
+          </div>
+          <div id="plot-cap-kc" class="plot-cap">
+            <p class="plot-cap-eyebrow">{plots.labelKC}</p>
+            <p class="plot-cap-text">{plots.captionKC}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -710,7 +729,10 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       .to('#text-kc',    { opacity: 1, duration: 0.07 }, 0.85)
       .to({}, { duration: 0.55 });
 
-    // ── Plot crossfade ───────────────────────────────────────────
+    // ── Plot pin: intro → normal plot → KC plot ──────────────────
+    // One scrubbed timeline owns all three beats so the intro text and
+    // the crossfade share a single pinned scroll budget. Intro starts
+    // visible; plots/captions start hidden (set in CSS) and fade in.
     const plotTl = gsap.timeline({
       scrollTrigger: {
         trigger: '#plots-pin',
@@ -720,12 +742,21 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       },
     });
     plotTl
+      // Intro holds at the top of the pin so there's reading time
+      .to({}, { duration: 0.45 })
+      // Intro fades out, normal plot + caption fade in
+      .to('#plots-intro-overlay', { opacity: 0, duration: 0.18 }, '>')
+      .to('#plot-normal',         { opacity: 1, duration: 0.18 }, '<')
+      .to('#plot-cap-normal',     { opacity: 1, duration: 0.18 }, '<')
+      // Hold the normal plot so the caption is readable
       .to({}, { duration: 0.4 })
+      // Crossfade to KC plot + caption
       .to('#plot-normal',     { opacity: 0, duration: 0.2 }, '>')
       .to('#plot-kc',         { opacity: 1, duration: 0.2 }, '<')
       .to('#plot-cap-normal', { opacity: 0, duration: 0.15 }, '<')
       .to('#plot-cap-kc',     { opacity: 1, duration: 0.15 }, '<0.05')
-      .to({}, { duration: 0.4 });
+      // Tail hold
+      .to({}, { duration: 0.45 });
 
     // ── Symptom cards stagger ────────────────────────────────────
     gsap.to('.symptom-card', {
