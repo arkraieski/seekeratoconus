@@ -1,6 +1,7 @@
 ---
 layout: ../layouts/Prose.astro
 title: Advocacy — See Keratoconus
+description: A perspective on disability advocacy, inclusive design, and the broader structural issues connected to living with keratoconus.
 ---
 
 # My Approach to Advocacy

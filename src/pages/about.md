@@ -1,6 +1,7 @@
 ---
 layout: ../layouts/Prose.astro
 title: About — See Keratoconus
+description: Personal background on why this keratoconus awareness site exists and how the diagnosis shaped its creator's perspective.
 ---
 
 # About
@@ -16,6 +17,8 @@ My diagnosis was shocking to me but also clarifying. Many separate experiences, 
 Prior to my diagnosis, I really needed glasses for years. But there's nothing I can do about that lost time, and beating myself up is not beneficial. But it can be hard to resist that temptation sometimes.
 
 Even though my journey hasn't been the smoothest, I think keratoconus has ultimately led me to bring a renewed sense of aspirational excellence to my software engineering and data science work. I started to more consciously prioritize user empathy and accessibility in my applications.
+
+Although it's [not a cure for keratoconus](https://nkcf.org/answering_your_questions_about_crosslinking/), I'm very thankful that corneal crosslinking has been able to stabilize my vision.
 
 ## Why I built this
 

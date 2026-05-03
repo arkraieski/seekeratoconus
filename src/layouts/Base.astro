@@ -1,7 +1,13 @@
 ---
-const { title = 'See Keratoconus' } = Astro.props;
+const {
+  title = 'See Keratoconus',
+  description = 'A visual and personal introduction to keratoconus, its symptoms, and why early diagnosis matters.',
+  ogType = 'website',
+} = Astro.props;
 const path = Astro.url.pathname;
 const isHome = path === '/';
+const canonical = Astro.site ? new URL(path, Astro.site).toString() : null;
+const ogImage = Astro.site ? new URL('/images/normal_hires.jpg', Astro.site).toString() : null;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +15,17 @@ const isHome = path === '/';
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
+  <meta name="description" content={description} />
+  {canonical && <link rel="canonical" href={canonical} />}
+  <meta property="og:type" content={ogType} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  {canonical && <meta property="og:url" content={canonical} />}
+  {ogImage && <meta property="og:image" content={ogImage} />}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  {ogImage && <meta name="twitter:image" content={ogImage} />}
   <style is:global>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 

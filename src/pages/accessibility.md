@@ -1,6 +1,7 @@
 ---
 layout: ../layouts/Prose.astro
 title: Accessibility — See Keratoconus
+description: Accessibility commitments, testing approach, and feedback information for the See Keratoconus site.
 ---
 
 # Accessibility
