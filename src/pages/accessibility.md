@@ -11,6 +11,8 @@ This site is built by someone with keratoconus. Accessibility is not an aftertho
 
 See Keratoconus aims to meet [WCAG 2.1 Level AA](https://www.w3.org/TR/WCAG21/) across all pages. That means sufficient color contrast, keyboard navigability, screen reader support, and respect for your motion preferences.
 
+The site is also manually tested with Apple's 'VoiceOver' screenreader software.
+
 ## What we've done
 
 - All pages are keyboard navigable with a visible focus indicator
