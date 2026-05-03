@@ -173,7 +173,8 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       flex-direction: column;
       align-items: center;
       gap: 0.5rem;
-      color: rgba(245,245,240,0.75);
+      color: rgba(245,245,240,0.95);
+      text-shadow: 0 1px 12px rgba(0,0,0,0.95), 0 0 24px rgba(0,0,0,0.75);
       font-size: 0.7rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -184,7 +185,8 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
     #scroll-hint .arrow {
       width: 1px;
       height: 48px;
-      background: linear-gradient(to bottom, rgba(245,245,240,0.7), transparent);
+      background: linear-gradient(to bottom, rgba(245,245,240,0.95), transparent);
+      box-shadow: 0 0 8px rgba(0,0,0,0.7);
     }
 
     @keyframes hintFadeIn {
@@ -309,6 +311,13 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       line-height: 1.7;
     }
 
+    .cta-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
     .btn {
       display: inline-block;
       padding: 0.85em 2em;
@@ -319,7 +328,8 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       font-size: 0.9rem;
       letter-spacing: 0.05em;
       border-radius: 2px;
-      transition: filter 0.4s ease, box-shadow 0.4s ease;
+      border: 1px solid transparent;
+      transition: filter 0.4s ease, box-shadow 0.4s ease, background 0.3s ease, border-color 0.3s ease;
     }
     .btn:hover,
     .btn:focus-visible {
@@ -329,11 +339,32 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
         0 10px 28px rgba(0,180,216,0.18),
         0 28px 50px rgba(0,180,216,0.08);
     }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--accent);
+      border-color: rgba(0,180,216,0.55);
+    }
+    .btn-ghost:hover,
+    .btn-ghost:focus-visible {
+      filter: blur(0.5px);
+      background: rgba(0,180,216,0.08);
+      border-color: var(--accent);
+      box-shadow:
+        0 2px 8px  rgba(0,180,216,0.18),
+        0 10px 28px rgba(0,180,216,0.10);
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .btn:hover,
       .btn:focus-visible {
         filter: none;
         box-shadow: 0 0 24px rgba(0,180,216,0.5);
+      }
+      .btn-ghost:hover,
+      .btn-ghost:focus-visible {
+        filter: none;
+        box-shadow: 0 0 18px rgba(0,180,216,0.3);
       }
     }
 
@@ -541,9 +572,14 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
     <p class="section-label">Take action</p>
     <h2>{cta.heading}</h2>
     <p>{cta.body}</p>
-    <a class="btn" href="https://www.nkcf.org" target="_blank" rel="noopener" aria-label="National Keratoconus Foundation (opens in new tab)">
-      National Keratoconus Foundation
-    </a>
+    <div class="cta-actions">
+      <a class="btn" href="https://www.nkcf.org" target="_blank" rel="noopener" aria-label="National Keratoconus Foundation (opens in new tab)">
+        National Keratoconus Foundation
+      </a>
+      <a class="btn btn-ghost" href="/about">
+        Read my story
+      </a>
+    </div>
   </section>
 
   </main>
