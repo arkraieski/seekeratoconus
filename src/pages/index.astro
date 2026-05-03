@@ -432,6 +432,24 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       color: rgba(245,245,240,0.7);
     }
 
+    /* ── MOBILE: each short content section gets its own screen ──
+       Without this, sections like the CTA and plots intro are well under
+       one viewport tall on a phone, so a single inertial swipe can carry
+       the reader past an entire heading + paragraph. min-height + flex
+       centering makes each section a deliberate "stop." */
+    @media (max-width: 640px) {
+      #plots-intro,
+      #what,
+      #cta {
+        min-height: 100svh;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    }
+
     /* ── REDUCED MOTION ── */
     @media (prefers-reduced-motion: reduce) {
       #vision { height: 100vh; }
