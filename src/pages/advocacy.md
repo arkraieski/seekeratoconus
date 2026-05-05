@@ -6,17 +6,17 @@ description: A perspective on disability advocacy, inclusive design, and the bro
 
 # My Approach to Advocacy
 
-My life's experience (including keratoconus but not limited to it) has lead me to understand how the world is designed for such a narrow set of humanity.
+My life's experience (including keratoconus but not limited to it) has lead me to understand that the world is designed for a very narrow set of humanity. And we shouldn't be ok so much exclusion in our world.
 
 It is clear to me that we must fight ableism. Structurally, modern society is not set up to value all lives equally.
 
 Effective organizing is possible, but we can't be naive about power. Power belongs to those that own social media platforms and other algorithms that mediate our reality. The competition for attention is higher than ever, but so is the need for change.
 
-## Technology, information, and power
-
 I am very passionate about inclusive design (in both physical and digital systems), and **I think that needs to be the default global way of thinking**.
 
-Wealthy elites use their ownership of platforms to control how information flows. How can we take power? Well, it is tied to the ability to retain attention. I believe that civic data from municipalities and national governments hold the key to offsetting this information asymmetry and achieving real power for grassroots movements. If you can turn mountains of bureaucratic data into charts, infographics, animations, maps, apps, and other digital experiences that capture attention on social media, that sounds like real power to me. 
+## Technology, information, and power
+
+Wealthy elites use their ownership of platforms to control how information flows. How can we take power? Well, it is tied to the ability to retain attention. I believe that civic data holds an underappreciated key to offsetting this information asymmetry and achieving real power for grassroots movements. If you can turn mountains of bureaucratic data into charts, infographics, animations, maps, apps, and other digital experiences that capture attention on social media, that sounds like real power to me. 
 
 I see AI both as an accessibility aid and a threat to disabled people (and other marginalized groups of people). On one hand, multimodal AI is almost uniquely capable of transforming information to accomodate individual sensory needs, but who controls it? Without [competitive open-source/open-weights models and interfaces, disabled people are renting any accessibility benefits](https://kraieski.dev/open-source-ai-freedom-is-a-disability-rights-battle) they get from AI. The accelerating push towards AI agents by companies also means that we need to demand AI labs do a better job at curbing ableist, racist, and sexist language in LLM output to prevent biased actions and decisions.
 
