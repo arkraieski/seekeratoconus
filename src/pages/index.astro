@@ -72,8 +72,8 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
 <Base title="See Keratoconus" description={meta.description}>
 
   <style is:global>
-    main#main-content { display: block; }
-    main#main-content:focus { outline: none; }
+    main { display: block; }
+    #main-content:focus { outline: none; }
 
     /* Mobile scroll-snap: each static content section becomes a "stop" so
        inertial swipes can't blow past a heading + paragraph in one flick.
@@ -522,7 +522,7 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
     }
   </style>
 
-  <main id="main-content" tabindex="-1">
+  <main>
 
   <!-- VISION TRANSITION — animation controlled by GSAP below -->
   <section id="vision" aria-label="Vision simulation">
@@ -543,7 +543,7 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       <img id="img-ghost"  class="vision-img" src="/images/normal_hires.jpg" style="opacity:0;mix-blend-mode:screen" alt="" aria-hidden="true" />
 
       <div id="text-hero">
-        <h1 class="hero-heading">{hero.heading}</h1>
+        <h1 class="hero-heading" id="main-content" tabindex="-1">{hero.heading}</h1>
         <p class="hero-sub">
           {hero.body}
           <a href="https://nkcf.org/understanding-kc/" class="cite" target="_blank" rel="noopener noreferrer" aria-label="National Keratoconus Foundation (opens in new tab)">NKCF</a>
