@@ -511,14 +511,29 @@ const extraSections: { label?: string; heading: string; paragraphs: string[] }[]
       .plots-visual {
         position: static;
         padding: 4rem 2rem 2rem;
-        gap: 2rem;
+        gap: 0.6rem;
       }
-      .plots-frame { aspect-ratio: auto; }
-      .plot-img { position: static; height: auto; width: 100%; display: block; }
+      /* Flatten the frame + caption wrappers so each label can sit directly
+         above its own chart, in reading order:
+           What most people see → normal chart → What I saw → KC chart */
+      .plots-frame,
+      #plot-caption { display: contents; }
+      .plot-img {
+        position: static;
+        display: block;
+        width: min(720px, 90vw);
+        height: auto;
+      }
       #plot-normal, #plot-kc { opacity: 1; }
-      .plot-cap { position: static; margin-top: 0.75rem; }
+      .plot-cap {
+        position: static;
+        width: min(560px, 90vw);
+      }
       #plot-cap-normal, #plot-cap-kc { opacity: 1; }
-      #plot-caption { min-height: auto; display: flex; flex-direction: column; gap: 2rem; }
+      #plot-cap-normal { order: 1; }
+      #plot-normal     { order: 2; margin-bottom: 2rem; }
+      #plot-cap-kc     { order: 3; }
+      #plot-kc         { order: 4; }
     }
   </style>
 
